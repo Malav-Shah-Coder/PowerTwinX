@@ -56,7 +56,7 @@ function buildPath(w: number, h: number) {
   return smoothPath(pts);
 }
 
-export function Wire({ onProgress }: { onProgress?: (p: number) => void }) {
+export function Wire({ onProgress }: { onProgress?: (p: number, y: number) => void }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const litRef = useRef<SVGPathElement>(null);
@@ -103,7 +103,7 @@ export function Wire({ onProgress }: { onProgress?: (p: number) => void }) {
         gsap.set(lit, { strokeDashoffset: len * (1 - p) });
         const pt = base.getPointAtLength(len * p);
         if (dotRef.current) gsap.set(dotRef.current, { x: pt.x, y: pt.y });
-        onProgress?.(p);
+        onProgress?.(p, pt.y);
       },
     });
     ScrollTrigger.refresh();

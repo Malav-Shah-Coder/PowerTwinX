@@ -1,9 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useRef } from "react";
 import { Wire } from "@/components/Wire";
 import { CustomCursor } from "@/components/CustomCursor";
 import { useLenis, useReveals } from "@/hooks/useScrollSetup";
 import { HouseIcon, PoleIcon, SolarIcon, TransformerIcon, TurbineIcon } from "@/components/Icons";
+import { Layers, Fingerprint, LayoutDashboard, ShieldCheck, Brain } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -30,20 +32,20 @@ const stats = [
 
 const faqs = [
   {
-    q: "What exactly is a digital twin of electricity?",
-    a: "A continuously synchronised virtual replica of your physical network — generation, lines, transformers and loads — fed by live telemetry so every simulation runs against reality, not a snapshot.",
+    q: "How does PowerTwinX create a digital twin of electricity?",
+    a: "A digital twin gives you a living view of your energy network — where power flows, where it is constrained, and where it can perform better.",
   },
   {
-    q: "Does it replace SCADA?",
-    a: "No. PowerTwinX sits on top of SCADA, IoT meters and weather feeds, fusing them into one model you can query, replay and forecast against.",
+    q: "How does it work with our existing SCADA infrastructure?",
+    a: "It works with the systems you already have, adding intelligence across your energy data to move from monitoring to optimisation.",
   },
   {
-    q: "How fast can a network be modelled?",
-    a: "Import GIS and asset registries and the base twin builds in hours. Calibration against live measurements typically completes within a week.",
+    q: "How quickly can we model an entire energy network?",
+    a: "From existing network data to a dynamic digital model, PowerTwinX helps you build a clearer picture of your system without rebuilding your operational infrastructure.",
   },
   {
-    q: "Can we run what-if scenarios?",
-    a: "Yes — outage cascades, EV load spikes, storm scenarios and new solar interconnects all run on the live model without touching field equipment.",
+    q: "Can we test scenarios before making real-world changes?",
+    a: "Yes. Test changes digitally before making them physically — understand the impact, compare possibilities and choose the smarter path forward.",
   },
 ];
 
@@ -57,7 +59,7 @@ function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`relative z-10 mx-auto w-full max-w-6xl px-6 py-28 md:py-40 ${className}`}>
+    <section id={id} className={cn("relative z-10 mx-auto w-full max-w-6xl px-6 py-28 md:py-40", className)}>
       {children}
     </section>
   );
@@ -72,15 +74,115 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
+function AnimatedLines() {
+  return (
+    <div className="pointer-events-none absolute inset-0 hidden lg:block overflow-visible -z-10 mt-10">
+      <svg className="h-full w-full opacity-80" preserveAspectRatio="none" viewBox="0 0 1000 600">
+        <defs>
+          <linearGradient id="voltLine" x1="0%" y1="0%" x2="100%" y2="0%">
+             <stop offset="0%" stopColor="var(--volt)" stopOpacity="0.2" />
+             <stop offset="50%" stopColor="var(--volt)" stopOpacity="1" />
+             <stop offset="100%" stopColor="var(--volt)" stopOpacity="0.2" />
+          </linearGradient>
+          <linearGradient id="voltLineVert" x1="0%" y1="100%" x2="0%" y2="0%">
+             <stop offset="0%" stopColor="var(--volt)" stopOpacity="0.2" />
+             <stop offset="100%" stopColor="var(--volt)" stopOpacity="1" />
+          </linearGradient>
+          <filter id="voltGlowBlur">
+             <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+             <feMerge>
+                 <feMergeNode in="coloredBlur"/>
+                 <feMergeNode in="SourceGraphic"/>
+             </feMerge>
+          </filter>
+        </defs>
+        
+        {/* Base Track */}
+        <g stroke="var(--border)" strokeWidth="1.5" fill="none" opacity="0.6">
+          <path d="M 310 160 C 380 160, 450 300, 500 300" />
+          <path d="M 310 440 C 380 440, 450 300, 500 300" />
+          <path d="M 690 160 C 620 160, 550 300, 500 300" />
+          <path d="M 690 440 C 620 440, 550 300, 500 300" />
+          <path d="M 500.1 520 C 500 420, 500 350, 500 300" />
+        </g>
+
+        {/* Animated Moving Dashes */}
+        <g strokeWidth="3" fill="none" filter="url(#voltGlowBlur)">
+          <path stroke="url(#voltLine)" d="M 310 160 C 380 160, 450 300, 500 300" strokeDasharray="30 60">
+            <animate attributeName="stroke-dashoffset" from="180" to="0" dur="2s" repeatCount="indefinite" />
+          </path>
+          <path stroke="url(#voltLine)" d="M 310 440 C 380 440, 450 300, 500 300" strokeDasharray="30 60">
+            <animate attributeName="stroke-dashoffset" from="180" to="0" dur="2.5s" repeatCount="indefinite" />
+          </path>
+          <path stroke="url(#voltLine)" d="M 690 160 C 620 160, 550 300, 500 300" strokeDasharray="30 60">
+            <animate attributeName="stroke-dashoffset" from="180" to="0" dur="2s" repeatCount="indefinite" />
+          </path>
+          <path stroke="url(#voltLine)" d="M 690 440 C 620 440, 550 300, 500 300" strokeDasharray="30 60">
+            <animate attributeName="stroke-dashoffset" from="180" to="0" dur="2.5s" repeatCount="indefinite" />
+          </path>
+          <path stroke="url(#voltLineVert)" d="M 500.1 520 C 500 420, 500 350, 500 300" strokeDasharray="30 60">
+            <animate attributeName="stroke-dashoffset" from="180" to="0" dur="1.8s" repeatCount="indefinite" />
+          </path>
+        </g>
+
+        {/* Glowing Anchor Dots */}
+        <g fill="var(--volt)" filter="url(#voltGlowBlur)">
+            <circle cx="310" cy="160" r="4" />
+            <circle cx="310" cy="440" r="4" />
+            <circle cx="690" cy="160" r="4" />
+            <circle cx="690" cy="440" r="4" />
+            <circle cx="500" cy="520" r="4" />
+            <circle cx="500" cy="300" r="6" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function PlatformCard({ num, title, highlight, desc, icon: Icon }: { num: string, title: string, highlight: string, desc: string, icon: any }) {
+  return (
+    <div className="card-soft reveal group flex items-start gap-4 p-6 hover:border-volt/30 transition-all bg-black/90 backdrop-blur-md relative z-10 w-[300px]">
+      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-background border border-border shadow-sm group-hover:border-volt/50 transition-colors duration-500">
+        <Icon className="h-6 w-6 text-foreground group-hover:text-volt transition-colors" />
+      </div>
+      <div>
+        <div className="text-xs font-semibold tracking-wider text-white">{num}</div>
+        <h3 className="mt-1 text-xl font-medium text-white">
+          {title} <span className="text-gradient-volt font-bold">{highlight}</span>
+        </h3>
+        <p className="mt-2 text-sm text-white leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   useLenis();
   useReveals();
   const [progress, setProgress] = useState(0);
-  const onProgress = useCallback((p: number) => {
+  const [lit, setLit] = useState(false);
+  const houseRef = useRef<HTMLDivElement>(null);
+
+  const onProgress = useCallback((p: number, y?: number) => {
     const pct = Math.round(p * 100);
     setProgress((prev) => (Math.round(prev * 100) === pct ? prev : pct / 100));
+
+    if (y !== undefined && houseRef.current) {
+      let curr: HTMLElement | null = houseRef.current;
+      let houseTop = 0;
+      while (curr && curr.tagName !== "MAIN") {
+        houseTop += curr.offsetTop;
+        curr = curr.offsetParent as HTMLElement;
+      }
+      
+      // Keep it lit if the wire tip has crossed into the house.
+      if (y > houseTop + 250) {
+        setLit(true);
+      } else {
+        setLit(false);
+      }
+    }
   }, []);
-  const lit = progress > 0.93;
 
   return (
     <main className="relative min-h-screen overflow-clip bg-background">
@@ -93,7 +195,7 @@ function Index() {
 
       {/* 1. HERO */}
       <Section className="flex min-h-screen flex-col justify-center pt-40">
-        <div className="grid items-center gap-14 md:grid-cols-[1.15fr_0.85fr]">
+        <div className="grid items-center gap-14 md:grid-cols-[1fr_1.1fr]">
           <div>
             <Eyebrow>Live grid intelligence</Eyebrow>
             <h1 className="mt-6 text-5xl leading-[1.02] md:text-7xl font-light">
@@ -119,9 +221,15 @@ function Index() {
               </a>
             </div>
           </div>
-          <div className="relative flex items-end justify-center gap-6 text-foreground/80">
-            <TurbineIcon className="h-56 w-40 md:h-72 md:w-52" />
-            <SolarIcon className="h-36 w-44 text-cyan md:h-44 md:w-56" />
+          <div className="relative flex items-center justify-center text-foreground/80">
+            <video
+              src="/hero-video.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="relative z-10 w-full max-w-xl rounded-2xl object-cover border border-border shadow-[var(--shadow-soft)]"
+            />
             <div
               className="absolute -z-10 h-64 w-64 rounded-full blur-3xl"
               style={{ backgroundColor: "var(--volt-soft)", opacity: 0.7 }}
@@ -135,9 +243,9 @@ function Index() {
         <div className="reveal grid gap-10 md:grid-cols-2 md:items-center">
             <div>
                 <Eyebrow>Understanding PowerTwinX</Eyebrow>
-                <h2 className="mt-5 text-4xl md:text-5xl">Beyond SCADA. <br/>A Living Replica.</h2>
+                <h2 className="mt-5 text-4xl md:text-5xl">A Digital View. <br/>A Smarter Journey.</h2>
                 <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-                    A digital twin isn't just a static map. It is a highly accurate, synchronized virtual model of your entire power grid—fed by real-time telemetry. Predict outages, balance load dynamically, and run thousands of what-if scenarios without touching a single physical asset.
+                    A digital twin brings the physical energy network into a virtual environment—making it easier to see how energy moves, where losses occur, and how the system performs. Explore changes, analyse possibilities, and identify opportunities to optimise before decisions reach the physical world.
                 </p>
             </div>
             <div className="card-soft relative min-h-[300px] flex items-center justify-center overflow-hidden border-volt/20">
@@ -151,7 +259,7 @@ function Index() {
                 </div>
                 <div className="relative z-10 text-center">
                     <TransformerIcon className="h-28 w-28 text-volt drop-shadow-[0_0_15px_rgba(205,255,100,0.4)] mix-blend-screen" />
-                    <div className="mt-4 font-display text-xl tracking-wider uppercase text-foreground">Synchronized</div>
+                    <div className="mt-4 font-display text-xl tracking-wider uppercase text-foreground">DIGITALLY CONNECTED</div>
                 </div>
             </div>
         </div>
@@ -162,15 +270,15 @@ function Index() {
         <div className="text-center reveal mb-16 flex flex-col items-center">
             <Eyebrow>Why PowerTwinX?</Eyebrow>
             <h2 className="mt-5 text-4xl md:text-5xl max-w-3xl mx-auto">
-                Transforming Grid Complexity into <span className="text-gradient-volt">Clarity</span>
+                Turning Energy Complexity into <span className="text-gradient-volt">Clarity</span>
             </h2>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
             {[
-                {title: "Predictive Intelligence", desc: "AI-driven forecasting spots anomalies and potential failures weeks before they happen, reducing unplanned downtime.", icon: "01"},
-                {title: "Risk-Free Scenarios", desc: "Spin up parallel realities. Test EV surges, extreme weather impacts, and DER integrations safely in the sandbox.", icon: "02"},
-                {title: "Real-Time Optimization", desc: "Minimize line losses and dynamically reroute power to avoid curtailment of renewable assets, maximizing efficiency.", icon: "03"}
+                {title: "Digital Understanding", desc: "Create a digital view of the energy journey to understand how energy moves, performs, and changes across the system.", icon: "01"},
+                {title: "Explore Before You Act", desc: "Analyse changes, evaluate possibilities, and understand potential outcomes digitally before implementing decisions in the physical system.", icon: "02"},
+                {title: "Smarter Optimisation", desc: "Identify losses, uncover opportunities, and improve how energy is transmitted, delivered, and ultimately used.", icon: "03"}
             ].map((benefit, i) => (
                 <div key={i} className="card-soft reveal p-8 hover:border-volt/30 transition-colors group">
                     <div className="text-4xl font-display text-muted-foreground/20 group-hover:text-volt/30 transition-colors mb-6">{benefit.icon}</div>
@@ -178,6 +286,39 @@ function Index() {
                     <p className="text-sm text-muted-foreground leading-relaxed">{benefit.desc}</p>
                 </div>
             ))}
+        </div>
+      </Section>
+
+      <Section id="platform-architecture" className="py-20 md:py-20 relative overflow-hidden bg-background/50 backdrop-blur-sm border rounded-2xl border-black">
+        <div className="text-center reveal mb-16 flex flex-col items-center">
+            <Eyebrow>WHY POWERTWINX™</Eyebrow>
+            <h2 className="mt-5 text-4xl md:text-5xl max-w-3xl mx-auto">
+                One platform. A smarter energy <span className="text-gradient-volt font-medium">tomorrow.</span>
+            </h2>
+            <p className="mt-6 text-muted-foreground text-lg">
+                From data to decisions — everything connected, intelligent and secure.
+            </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 lg:gap-8 items-center max-w-[85rem] mx-auto my-20 relative z-10 w-full px-4 lg:px-12 xl:px-16">
+            <AnimatedLines />
+            <div className="flex flex-col gap-8 lg:gap-24 w-full max-w-[300px] mx-auto lg:mx-0 lg:ml-0 lg:mr-auto">
+                <PlatformCard num="01" title="One" highlight="Platform" desc="Everything connected." icon={Layers} />
+                <PlatformCard num="02" title="One" highlight="Identity" desc="Every asset uniquely identified." icon={Fingerprint} />
+            </div>
+
+            <div className="relative mx-auto flex w-full max-w-sm flex-col items-center justify-center lg:max-w-md reveal py-6 lg:py-0">
+                <div className="absolute inset-0 bg-volt/10 rounded-full blur-[100px] -z-10 animate-pulse"></div>
+                <img src="/platform-layers.png" alt="Platform Layers" className="w-full object-contain mix-blend-screen drop-shadow-[0_0_40px_rgba(205,255,100,0.15)] transition-transform duration-700 hover:scale-[1.03]" />
+                <div className="mt-8 -mb-6 lg:-mb-12 w-full max-w-[300px] mx-auto z-20 flex justify-center">
+                     <PlatformCard num="03" title="One" highlight="Dashboard" desc="Real-time visibility." icon={LayoutDashboard} />
+                </div>
+            </div>
+
+            <div className="flex flex-col gap-8 lg:gap-24 w-full max-w-[300px] mx-auto lg:mx-0 lg:mr-0 lg:ml-auto">
+                <PlatformCard num="05" title="One" highlight="Intelligence" desc="AI-powered decisions." icon={Brain} />
+                <PlatformCard num="04" title="One" highlight="Truth" desc="Blockchain secured." icon={ShieldCheck} />
+            </div>
         </div>
       </Section>
 
@@ -203,16 +344,16 @@ function Index() {
       <Section id="implementation" className="py-20 md:py-32">
         <div className="reveal max-w-2xl">
             <Eyebrow>Implementation</Eyebrow>
-            <h2 className="mt-5 text-4xl md:text-5xl">From zero to fully-mapped in days.</h2>
+            <h2 className="mt-5 text-4xl md:text-5xl">From Energy Data to a Living Digital Twin.</h2>
         </div>
 
         <div className="mt-16 space-y-12">
             {[
-                {step: "Phase 1: Ingestion", content: "Import existing GIS data, SCADA history, and smart meter topology. We construct the baseline twin automatically."},
-                {step: "Phase 2: Calibration", content: "AI models compare historical telemetry with physics-based simulations, tuning resistance and line parameters until the twin perfectly mirrors reality."},
-                {step: "Phase 3: Live Sync", content: "WebSockets and APIs connect real-time data streams. Your digital grid is now breathing."}
+                {step: "Build the Foundation", content: "Bring together existing energy, network, and system data to create a connected digital representation of the physical energy journey."},
+                {step: "Understand & Calibrate", content: "Use historical information and system behaviour to build a digital view that reflects how the real energy network performs."},
+                {step: "Connect & Evolve", content: "Bring changing energy conditions into the digital environment, keeping the view of the system aligned with what is happening in the real world."}
             ].map((item, idx) => (
-                <div key={idx} className="reveal flex flex-col md:flex-row gap-6 md:gap-12 md:items-center">
+                <div key={idx} className="reveal flex flex-col md:flex-row gap-6 md:gap-12 md:items-center bg-background/90 backdrop-blur p-6 md:p-8 rounded-3xl border border-border/10">
                     <div className="shrink-0 w-16 h-16 rounded-full border border-volt bg-volt/5 flex items-center justify-center font-display text-2xl text-volt">
                         {idx + 1}
                     </div>
@@ -230,7 +371,7 @@ function Index() {
         <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
           <div className="reveal">
             <Eyebrow>FAQ</Eyebrow>
-            <h2 className="mt-5 text-4xl">Questions along the wire.</h2>
+            <h2 className="mt-5 text-4xl">Questions. Modelled. Answered.</h2>
           </div>
           <div className="reveal divide-y divide-border rounded-3xl border border-border bg-surface">
             {faqs.map((f) => (
@@ -248,7 +389,7 @@ function Index() {
 
       {/* 10. Call to Action / House Payoff */}
       <Section id="house" className="pb-44 text-center">
-        <div className="relative mx-auto flex max-w-3xl flex-col items-center">
+        <div ref={houseRef} className="relative mx-auto flex max-w-3xl flex-col items-center">
           <div
             className="absolute top-10 h-72 w-72 rounded-full blur-3xl transition-opacity duration-700"
             style={{

@@ -71,8 +71,8 @@ export function HouseIcon({ className, lit = false }: P & { lit?: boolean }) {
       />
       <path d="M14 84 100 18l86 66" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
       <rect
-        x="60"
-        y="96"
+        x="40"
+        y="85"
         width="30"
         height="26"
         rx="3"
@@ -82,8 +82,8 @@ export function HouseIcon({ className, lit = false }: P & { lit?: boolean }) {
         fill={lit ? "var(--volt)" : "transparent"}
       />
       <rect
-        x="112"
-        y="96"
+        x="130"
+        y="85"
         width="30"
         height="26"
         rx="3"
