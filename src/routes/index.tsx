@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useState, useRef } from "react";
+import { useCallback, useState, useRef, useEffect } from "react";
 import { Wire } from "@/components/Wire";
 import { CustomCursor } from "@/components/CustomCursor";
 import { useLenis, useReveals } from "@/hooks/useScrollSetup";
 import { HouseIcon, PoleIcon, SolarIcon, TransformerIcon, TurbineIcon } from "@/components/Icons";
-import { Layers, Fingerprint, LayoutDashboard, ShieldCheck, Brain } from "lucide-react";
+import { Wifi, QrCode, MonitorSmartphone, Lock, BrainCircuit } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -156,6 +156,47 @@ function PlatformCard({ num, title, highlight, desc, icon: Icon }: { num: string
   );
 }
 
+function Slideshow() {
+  const images = [
+    "/slide-1.png",
+    "/slide-2.png",
+    "/slide-3.png",
+    "/slide-4.jpeg",
+    "/slide-5.jpeg",
+  ];
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="card-soft relative aspect-video w-full flex items-center justify-center overflow-hidden border-border bg-black/90">
+      {images.map((src, index) => (
+        <img
+          key={src}
+          src={src}
+          alt={`Slide ${index + 1}`}
+          className={cn(
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-1000",
+            index === currentIndex ? "opacity-100" : "opacity-0"
+          )}
+        />
+      ))}
+      <div className="" />
+      {/* <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" /> */}
+      {/* <div className="absolute bottom-6 left-0 right-0 z-10 text-center">
+         <div className="font-display text-2xl tracking-wider text-white drop-shadow-md">
+             DIGITALLY CONNECTED
+         </div>
+      </div> */}
+    </div>
+  );
+}
+
 function Index() {
   useLenis();
   useReveals();
@@ -239,7 +280,7 @@ function Index() {
       </Section>
 
       {/* 2. What is a Digital Twin? */}
-      <Section id="what-is-it" className="py-20 md:py-32">
+      <Section id="what-is-it" className="my-24 py-12 md:py-12 bg-background/50 backdrop-blur-sm border rounded-2xl border-border">
         <div className="reveal grid gap-10 md:grid-cols-2 md:items-center">
             <div>
                 <Eyebrow>Understanding PowerTwinX</Eyebrow>
@@ -248,26 +289,13 @@ function Index() {
                     A digital twin brings the physical energy network into a virtual environment—making it easier to see how energy moves, where losses occur, and how the system performs. Explore changes, analyse possibilities, and identify opportunities to optimise before decisions reach the physical world.
                 </p>
             </div>
-            <div className="card-soft relative min-h-[300px] flex items-center justify-center overflow-hidden border-volt/20">
-                <div className="absolute inset-0 bg-gradient-to-tr from-background to-surface opacity-50"></div>
-                <div className="absolute inset-0 group">
-                    <div className="w-full h-full flex flex-wrap gap-1 p-4 opacity-30">
-                        {Array.from({length: 100}).map((_, i) => (
-                             <div key={i} className="w-[8%] h-[8%] rounded-sm bg-muted-foreground/10 transition-colors duration-1000" style={{backgroundColor: i % 7 === 0 ? 'var(--volt)' : ''}} />
-                        ))}
-                    </div>
-                </div>
-                <div className="relative z-10 text-center">
-                    <TransformerIcon className="h-28 w-28 text-volt drop-shadow-[0_0_15px_rgba(205,255,100,0.4)] mix-blend-screen" />
-                    <div className="mt-4 font-display text-xl tracking-wider uppercase text-foreground">DIGITALLY CONNECTED</div>
-                </div>
-            </div>
+            <Slideshow />
         </div>
       </Section>
 
       {/* 4. Why PowerTwinX? & 5. Key Benefits */}
       <Section id="why" className="py-20">
-        <div className="p-6 card-soft text-center reveal mb-16 flex flex-col items-center">
+        <div className="p-6 text-center reveal mb-16 flex flex-col items-center bg-background/50 backdrop-blur-sm border rounded-2xl border-border">
             <Eyebrow>Why PowerTwinX?</Eyebrow>
             <h2 className="mt-5 text-4xl md:text-5xl max-w-3xl mx-auto">
                 Turning Energy Complexity into <span className="text-gradient-volt">Clarity</span>
@@ -280,8 +308,9 @@ function Index() {
                 {title: "Explore Before You Act", desc: "Analyse changes, evaluate possibilities, and understand potential outcomes digitally before implementing decisions in the physical system.", icon: "02"},
                 {title: "Smarter Optimisation", desc: "Identify losses, uncover opportunities, and improve how energy is transmitted, delivered, and ultimately used.", icon: "03"}
             ].map((benefit, i) => (
-                <div key={i} className="card-soft reveal p-8 hover:border-volt/30 transition-colors group">
-                    <div className="text-4xl font-display text-muted-foreground/20 group-hover:text-volt/30 transition-colors mb-6">{benefit.icon}</div>
+              // <div key={i} className="card-soft reveal p-8 hover:border-volt/30 transition-colors group">
+              <div key={i} className="bg-background/50 backdrop-blur-sm border rounded-2xl border-border reveal p-8 hover:border-volt/30 transition-colors group">
+              <div className="text-4xl font-display text-muted-foreground group-hover:text-volt transition-colors mb-6">{benefit.icon}</div>
                     <h3 className="text-2xl font-medium mb-3">{benefit.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{benefit.desc}</p>
                 </div>
@@ -303,27 +332,27 @@ function Index() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 lg:gap-8 items-center max-w-[85rem] mx-auto my-20 relative z-10 w-full px-4 lg:px-12 xl:px-16">
             <AnimatedLines />
             <div className="flex flex-col gap-8 lg:gap-24 w-full max-w-[300px] mx-auto lg:mx-0 lg:ml-0 lg:mr-auto">
-                <PlatformCard num="01" title="One" highlight="Platform" desc="Everything Connected." icon={Layers} />
-                <PlatformCard num="02" title="One" highlight="Identity" desc="Each Asset is Unique." icon={Fingerprint} />
+                <PlatformCard num="01" title="One" highlight="Platform" desc="Everything Connected." icon={Wifi} />
+                <PlatformCard num="02" title="One" highlight="Identity" desc="Each Asset is Unique." icon={QrCode} />
             </div>
 
             <div className="relative mx-auto flex w-full max-w-sm flex-col items-center justify-center lg:max-w-md reveal pb-10 pt-4 lg:py-0 order-first lg:order-none">
                 <div className="absolute inset-0 bg-volt/10 rounded-full blur-[100px] -z-10 animate-pulse"></div>
                 <img src="/platform-layers.png" alt="Platform Layers" className="w-full object-contain mix-blend-screen drop-shadow-[0_0_40px_rgba(205,255,100,0.15)] transition-transform duration-700 hover:scale-[1.03]" />
                 <div className="mt-8 -mb-6 lg:-mb-12 w-full max-w-[300px] mx-auto z-20 flex justify-center">
-                     <PlatformCard num="03" title="One" highlight="Dashboard" desc="Real-time Visibility." icon={LayoutDashboard} />
+                     <PlatformCard num="03" title="One" highlight="Dashboard" desc="Real-time Visibility." icon={MonitorSmartphone} />
                 </div>
             </div>
 
             <div className="flex flex-col gap-8 lg:gap-24 w-full max-w-[300px] mx-auto lg:mx-0 lg:mr-0 lg:ml-auto">
-                <PlatformCard num="05" title="One" highlight="Intelligence" desc="AI-Powered Decisions." icon={Brain} />
-                <PlatformCard num="04" title="One" highlight="Truth" desc="BlockChain Secured." icon={ShieldCheck} />
+                <PlatformCard num="05" title="One" highlight="Intelligence" desc="AI-Powered Decisions." icon={BrainCircuit} />
+                <PlatformCard num="04" title="One" highlight="Truth" desc="BlockChain Secured." icon={Lock} />
             </div>
         </div>
       </Section>
 
       {/* 7. Statistics & Impact (Keep as current style) */}
-      <Section id="generation">
+      <Section id="generation" className="my-24 py-12 md:py-12 bg-background/50 backdrop-blur-sm border rounded-2xl border-border">
         <div className="reveal">
           <Eyebrow>Impact & Scale</Eyebrow>
           <h2 className="mt-5 max-w-2xl text-4xl md:text-5xl">
@@ -341,7 +370,7 @@ function Index() {
       </Section>
 
       {/* 8. Implementation Process */}
-      <Section id="implementation" className="py-20 md:py-32">
+      <Section id="implementation" className="py-20 md:py-12 my-20 bg-background/50 backdrop-blur-sm border rounded-2xl border-border">
         <div className="reveal max-w-2xl">
             <Eyebrow>Implementation</Eyebrow>
             <h2 className="mt-5 text-4xl md:text-5xl">From Energy Data to a Living Digital Twin.</h2>
