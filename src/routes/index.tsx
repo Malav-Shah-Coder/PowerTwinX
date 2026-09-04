@@ -228,7 +228,7 @@ function Index() {
               loop
               muted
               playsInline
-              className="relative z-10 w-full max-w-xl rounded-2xl object-cover border border-border shadow-[var(--shadow-soft)]"
+              className="relative z-10 w-full max-w-xl rounded-2xl object-cover border border-black border-2 shadow-[var(--shadow-soft)]"
             />
             <div
               className="absolute -z-10 h-64 w-64 rounded-full blur-3xl"
