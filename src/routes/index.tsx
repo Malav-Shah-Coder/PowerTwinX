@@ -148,7 +148,7 @@ function PlatformCard({ num, title, highlight, desc, icon: Icon }: { num: string
       <div>
         {/* <div className="text-xs font-semibold tracking-wider text-white">{num}</div> */}
         <h3 className="text-xl font-medium text-white">
-          {title} <span className="text-gradient-volt text-2xl font-bold">{highlight}</span>
+          {title} &nbsp; <span className="text-gradient-volt text-2xl font-bold">{highlight}</span>
         </h3>
         <p className="mt-1 text-md text-white leading-relaxed">{desc}</p>
       </div>
@@ -310,7 +310,7 @@ function Index() {
             ].map((benefit, i) => (
               // <div key={i} className="card-soft reveal p-8 hover:border-volt/30 transition-colors group">
               <div key={i} className="bg-background/50 backdrop-blur-sm border rounded-2xl border-border reveal p-8 hover:border-volt/30 transition-colors group">
-              <div className="text-4xl font-display text-muted-foreground group-hover:text-volt transition-colors mb-6">{benefit.icon}</div>
+              {/* <div className="text-4xl font-display text-muted-foreground group-hover:text-volt transition-colors mb-6">{benefit.icon}</div> */}
                     <h3 className="text-2xl font-medium mb-3">{benefit.title}</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">{benefit.desc}</p>
                 </div>
@@ -427,38 +427,57 @@ function Index() {
               animation: lit ? "pulse-glow 2.6s ease-in-out infinite" : undefined,
             }}
           />
-          <HouseIcon
-            lit={lit}
-            className={`relative h-56 w-64 transition-all duration-500 md:h-72 md:w-80 ${
-              lit ? "text-foreground scale-[1.03]" : "text-foreground/60"
-            }`}
-          />
-          <h2 className="mt-10 text-4xl md:text-6xl">
-            {lit ? (
-              <>
-                The lights are <span className="text-gradient-volt">on</span>.
-              </>
-            ) : (
-              <>Keep scrolling — the current is almost home.</>
-            )}
-          </h2>
-          <p className="mt-5 max-w-xl text-muted-foreground">
-            Everything you just scrolled past happens thousands of times a second. PowerTwinX is the
-            platform that keeps up with it.
-          </p>
-          <div className="mt-9 flex flex-wrap justify-center gap-4">
-            <a
-              href="/demo"
-              className="rounded-full bg-primary px-8 py-4 px-10 text-sm font-medium text-primary-foreground hover:scale-105 transition-transform"
-            >
-              Book a Consultation
-            </a>
-            <a
-              href="/about"
-              className="rounded-full border border-border bg-surface px-8 py-4 text-sm font-medium hover:bg-muted transition-colors"
-            >
-              Learn More
-            </a>
+          <div className="relative inline-block">
+            <HouseIcon
+              lit={lit}
+              className={`relative z-10 h-56 w-64 transition-all duration-500 md:h-72 md:w-80 ${
+                lit ? "text-foreground scale-[1.03]" : "text-foreground/60"
+              }`}
+            />
+            {/* Dynamic Light Swapping Images Above Windows */}
+            <div className={`absolute left-[53%] top-[35%] -translate-x-1/2 -translate-y-1/2 h-16 w-16 md:h-20 md:w-20 z-20 pointer-events-none transition-transform duration-500 ${
+                lit ? "scale-[1.03]" : ""
+              }`}>
+              <img 
+                src="/light-off.png" 
+                alt="Off" 
+                className={`absolute inset-0 w-[60px] h-[60px] object-contain transition-all duration-700 ${lit ? 'opacity-0 scale-95 delay-0' : 'opacity-100 scale-100 delay-200'}`} 
+              />
+              <img 
+                src="/light-on.png" 
+                alt="On" 
+                className={`absolute inset-0 w-[60px] h-[60px] object-contain transition-all duration-700 ${lit ? 'opacity-100 scale-100 delay-200' : 'opacity-0 scale-95 delay-0'}`} 
+              />
+            </div>
+          </div>
+          <div className="p-8 pb-10 mt-8 bg-background/50 backdrop-blur-sm border rounded-2xl border-border">
+            <h2 className="text-4xl md:text-6xl">
+              {lit ? (
+                <>
+                  The lights are <span className="text-gradient-volt">on</span>.
+                </>
+              ) : (
+                <>Keep scrolling — the current is almost home.</>
+              )}
+            </h2>
+            <p className="mt-5 max-w-xl text-muted-foreground">
+              Everything you just scrolled past happens thousands of times a second. PowerTwinX is the
+              platform that keeps up with it.
+            </p>
+            <div className="mt-9 flex flex-wrap justify-center gap-4">
+              <a
+                href="/demo"
+                className="rounded-full bg-primary px-8 py-4 px-10 text-sm font-medium text-primary-foreground hover:scale-105 transition-transform"
+              >
+                Book a Consultation
+              </a>
+              <a
+                href="/about"
+                className="rounded-full border border-border bg-surface px-8 py-4 text-sm font-medium hover:bg-muted transition-colors"
+              >
+                Learn More
+              </a>
+            </div>
           </div>
         </div>
       </Section>
