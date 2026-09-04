@@ -289,7 +289,7 @@ function Index() {
         </div>
       </Section>
 
-      <Section id="platform-architecture" className="py-20 md:py-20 relative overflow-hidden bg-background/50 backdrop-blur-sm border rounded-2xl border-black">
+      <Section id="platform-architecture" className="py-20 md:py-20 relative overflow-hidden bg-background/50 backdrop-blur-sm border rounded-2xl border-border">
         <div className="text-center reveal mb-16 flex flex-col items-center">
             <Eyebrow>WHY POWERTWINX™</Eyebrow>
             <h2 className="mt-5 text-4xl md:text-5xl max-w-3xl mx-auto">
