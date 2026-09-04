@@ -141,16 +141,16 @@ function AnimatedLines() {
 
 function PlatformCard({ num, title, highlight, desc, icon: Icon }: { num: string, title: string, highlight: string, desc: string, icon: any }) {
   return (
-    <div className="card-soft reveal group flex items-start gap-4 p-5 hover:border-volt/30 transition-all bg-black/90 backdrop-blur-md relative z-10 w-full sm:w-[300px]">
+    <div className="card-soft reveal group flex items-center gap-4 p-5 hover:border-volt/30 transition-all bg-black/90 backdrop-blur-md relative z-10 w-full sm:w-[300px]">
       <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-background border border-border shadow-sm group-hover:border-volt/50 transition-colors duration-500">
         <Icon className="h-6 w-6 text-foreground group-hover:text-volt transition-colors" />
       </div>
       <div>
-        <div className="text-xs font-semibold tracking-wider text-white">{num}</div>
-        <h3 className="mt-1 text-xl font-medium text-white">
-          {title} <span className="text-gradient-volt font-bold">{highlight}</span>
+        {/* <div className="text-xs font-semibold tracking-wider text-white">{num}</div> */}
+        <h3 className="text-xl font-medium text-white">
+          {title} <span className="text-gradient-volt text-2xl font-bold">{highlight}</span>
         </h3>
-        <p className="mt-2 text-sm text-white leading-relaxed">{desc}</p>
+        <p className="mt-1 text-md text-white leading-relaxed">{desc}</p>
       </div>
     </div>
   );
@@ -267,7 +267,7 @@ function Index() {
 
       {/* 4. Why PowerTwinX? & 5. Key Benefits */}
       <Section id="why" className="py-20">
-        <div className="text-center reveal mb-16 flex flex-col items-center">
+        <div className="p-6 card-soft text-center reveal mb-16 flex flex-col items-center">
             <Eyebrow>Why PowerTwinX?</Eyebrow>
             <h2 className="mt-5 text-4xl md:text-5xl max-w-3xl mx-auto">
                 Turning Energy Complexity into <span className="text-gradient-volt">Clarity</span>
@@ -303,21 +303,21 @@ function Index() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-6 lg:gap-8 items-center max-w-[85rem] mx-auto my-20 relative z-10 w-full px-4 lg:px-12 xl:px-16">
             <AnimatedLines />
             <div className="flex flex-col gap-8 lg:gap-24 w-full max-w-[300px] mx-auto lg:mx-0 lg:ml-0 lg:mr-auto">
-                <PlatformCard num="01" title="One" highlight="Platform" desc="Everything connected." icon={Layers} />
-                <PlatformCard num="02" title="One" highlight="Identity" desc="Each asset is unique." icon={Fingerprint} />
+                <PlatformCard num="01" title="One" highlight="Platform" desc="Everything Connected." icon={Layers} />
+                <PlatformCard num="02" title="One" highlight="Identity" desc="Each Asset is Unique." icon={Fingerprint} />
             </div>
 
             <div className="relative mx-auto flex w-full max-w-sm flex-col items-center justify-center lg:max-w-md reveal pb-10 pt-4 lg:py-0 order-first lg:order-none">
                 <div className="absolute inset-0 bg-volt/10 rounded-full blur-[100px] -z-10 animate-pulse"></div>
                 <img src="/platform-layers.png" alt="Platform Layers" className="w-full object-contain mix-blend-screen drop-shadow-[0_0_40px_rgba(205,255,100,0.15)] transition-transform duration-700 hover:scale-[1.03]" />
                 <div className="mt-8 -mb-6 lg:-mb-12 w-full max-w-[300px] mx-auto z-20 flex justify-center">
-                     <PlatformCard num="03" title="One" highlight="Dashboard" desc="Real-time visibility." icon={LayoutDashboard} />
+                     <PlatformCard num="03" title="One" highlight="Dashboard" desc="Real-time Visibility." icon={LayoutDashboard} />
                 </div>
             </div>
 
             <div className="flex flex-col gap-8 lg:gap-24 w-full max-w-[300px] mx-auto lg:mx-0 lg:mr-0 lg:ml-auto">
-                <PlatformCard num="05" title="One" highlight="Intelligence" desc="AI-powered decisions." icon={Brain} />
-                <PlatformCard num="04" title="One" highlight="Truth" desc="Blockchain secured." icon={ShieldCheck} />
+                <PlatformCard num="05" title="One" highlight="Intelligence" desc="AI-Powered Decisions." icon={Brain} />
+                <PlatformCard num="04" title="One" highlight="Truth" desc="BlockChain Secured." icon={ShieldCheck} />
             </div>
         </div>
       </Section>
