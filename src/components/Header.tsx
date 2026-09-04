@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 export function Header() {
   return (
     <header className="fixed left-1/2 top-5 z-50 flex w-[min(96%,80rem)] -translate-x-1/2 items-center justify-between rounded-full border border-border bg-black text-white px-5 py-3 backdrop-blur-xl">
-      <img src="/logo-hr.png" alt="PowerTwinX" className="h-8 px-2" />
+      <img src="/logo-hr.png" alt="PowerTwinX" className="h-12 px-2" />
       <nav className="hidden gap-6 text-sm text-white/70 md:flex">
         <Link to="/" className="transition-colors hover:text-white [&.active]:text-white">Home</Link>
         <Link to="/about" className="transition-colors hover:text-white [&.active]:text-white">About Us</Link>
