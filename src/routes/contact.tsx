@@ -36,7 +36,7 @@ export function ContactPage() {
   useReveals();
 
   return (
-    <main className="relative min-h-screen overflow-clip bg-background font-sans">
+    <main className="relative min-h-screen flex flex-col overflow-clip bg-background font-sans">
       <CustomCursor />
       <Header />
       

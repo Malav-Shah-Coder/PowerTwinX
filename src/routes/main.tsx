@@ -89,7 +89,7 @@ function Index() {
   const lit = progress > 0.93;
 
   return (
-    <main className="relative min-h-screen overflow-clip bg-background">
+    <main className="relative min-h-screen flex flex-col overflow-clip bg-background">
       <CustomCursor />
 
       <header className="fixed left-1/2 top-5 z-50 flex w-[min(92%,72rem)] -translate-x-1/2 items-center justify-between rounded-full border border-border bg-surface/70 px-5 py-3 backdrop-blur-xl">

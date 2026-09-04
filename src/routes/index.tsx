@@ -141,7 +141,7 @@ function AnimatedLines() {
 
 function PlatformCard({ num, title, highlight, desc, icon: Icon }: { num: string, title: string, highlight: string, desc: string, icon: any }) {
   return (
-    <div className="card-soft reveal group flex items-start gap-4 p-6 hover:border-volt/30 transition-all bg-black/90 backdrop-blur-md relative z-10 w-[300px]">
+    <div className="card-soft reveal group flex items-start gap-4 p-5 hover:border-volt/30 transition-all bg-black/90 backdrop-blur-md relative z-10 w-full sm:w-[300px]">
       <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-background border border-border shadow-sm group-hover:border-volt/50 transition-colors duration-500">
         <Icon className="h-6 w-6 text-foreground group-hover:text-volt transition-colors" />
       </div>
@@ -185,7 +185,7 @@ function Index() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-clip bg-background">
+    <main className="relative min-h-screen flex flex-col overflow-clip bg-background">
       <CustomCursor />
       <Header />
 
@@ -199,7 +199,7 @@ function Index() {
           <div>
             <Eyebrow>Live grid intelligence</Eyebrow>
             <h1 className="mt-6 text-5xl leading-[1.02] md:text-7xl font-light">
-              The <span className="text-gradient-volt font-medium">digital twin</span> of electricity, from
+              The <span className="text-gradient-volt font-bold">digital twin</span> of electricity, from
               first gust to last lightbulb.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
@@ -304,10 +304,10 @@ function Index() {
             <AnimatedLines />
             <div className="flex flex-col gap-8 lg:gap-24 w-full max-w-[300px] mx-auto lg:mx-0 lg:ml-0 lg:mr-auto">
                 <PlatformCard num="01" title="One" highlight="Platform" desc="Everything connected." icon={Layers} />
-                <PlatformCard num="02" title="One" highlight="Identity" desc="Every asset uniquely identified." icon={Fingerprint} />
+                <PlatformCard num="02" title="One" highlight="Identity" desc="Each asset is unique." icon={Fingerprint} />
             </div>
 
-            <div className="relative mx-auto flex w-full max-w-sm flex-col items-center justify-center lg:max-w-md reveal py-6 lg:py-0">
+            <div className="relative mx-auto flex w-full max-w-sm flex-col items-center justify-center lg:max-w-md reveal pb-10 pt-4 lg:py-0 order-first lg:order-none">
                 <div className="absolute inset-0 bg-volt/10 rounded-full blur-[100px] -z-10 animate-pulse"></div>
                 <img src="/platform-layers.png" alt="Platform Layers" className="w-full object-contain mix-blend-screen drop-shadow-[0_0_40px_rgba(205,255,100,0.15)] transition-transform duration-700 hover:scale-[1.03]" />
                 <div className="mt-8 -mb-6 lg:-mb-12 w-full max-w-[300px] mx-auto z-20 flex justify-center">

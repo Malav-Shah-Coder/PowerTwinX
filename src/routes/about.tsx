@@ -36,7 +36,7 @@ export function AboutPage() {
   useReveals();
 
   return (
-    <main className="relative min-h-screen overflow-clip bg-background font-sans">
+    <main className="relative min-h-screen flex flex-col overflow-clip bg-background font-sans">
       <CustomCursor />
       <Header />
       
@@ -75,7 +75,8 @@ export function AboutPage() {
         </div>
       </Section>
 
-      {/* Team */}
+      {/* Team - Temporarily Hidden */}
+      {false && (
       <Section>
         <div className="reveal mb-12">
             <Eyebrow>The People</Eyebrow>
@@ -100,8 +101,10 @@ export function AboutPage() {
             ))}
         </div>
       </Section>
+      )}
 
-      {/* Partners & Certifications */}
+      {/* Partners & Certifications - Temporarily Hidden */}
+      {false && (
       <Section>
           <div className="reveal text-center mb-12">
             <h2 className="text-2xl text-muted-foreground font-light">Trusted by Industry Leaders & Certified for Excellence</h2>
@@ -114,6 +117,7 @@ export function AboutPage() {
               <div className="h-10 w-32 bg-muted-foreground/30 animate-pulse rounded-md" />
           </div>
       </Section>
+      )}
 
       <Footer />
     </main>

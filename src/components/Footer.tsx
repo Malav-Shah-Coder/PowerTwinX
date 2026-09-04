@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-border bg-black text-white pt-20 pb-10">
+    <footer className="relative z-10 border-t border-border bg-black text-white pt-20 pb-10 mt-auto">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-10 mb-16">
         <div className="col-span-2 md:col-span-2">
           <img src="/logo-hr.png" alt="PowerTwinX" className="h-10 mb-4 block" />
