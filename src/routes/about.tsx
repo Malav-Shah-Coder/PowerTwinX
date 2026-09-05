@@ -63,13 +63,13 @@ export function AboutPage() {
             <div className="card-soft reveal p-10 flex flex-col justify-center">
                 <h2 className="text-3xl mb-4 font-medium">Our Vision</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                    A world where every physical grid has a perfect digital counterpart, enabling 100% renewable energy integration without compromising reliability. We envision a zero-outage future driven by predictive AI.
+                    A world where the entire energy journey can be understood as one connected system — from generation and transmission to delivery and consumption. We envision a future where better visibility leads to smarter decisions, greater efficiency, and more intelligent use of energy.
                 </p>
             </div>
             <div className="card-soft reveal p-10 flex flex-col justify-center">
                 <h2 className="text-3xl mb-4 font-medium">Our Mission</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                    To deliver an ultra-premium, real-time digital twin platform that empowers utilities and operators to monitor, simulate, and predict grid behavior instantly, securely, and intuitively.
+                    To make energy easier to see, understand, analyse, and optimise through digital intelligence. PowerTwinX connects the physical energy journey with a digital perspective, helping organisations make better decisions about how energy is transmitted, delivered, and used.
                 </p>
             </div>
         </div>

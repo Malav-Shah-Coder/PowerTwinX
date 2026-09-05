@@ -99,44 +99,42 @@ export function ContactPage() {
               </div>
 
               {/* Office & Details */}
-              <div className="reveal space-y-10">
+              <div className="reveal flex flex-col gap-10">
+                  {/* Google Map Embed */}
+                  <div className="relative w-full aspect-video lg:aspect-square rounded-2xl border border-border/50 bg-surface overflow-hidden shadow-[0_0_20px_rgba(205,255,100,0.02)]">
+                      <iframe 
+                        src="https://maps.google.com/maps?q=Titanium%20City%20Center,%20Satellite,%20Ahmedabad&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        className="absolute inset-0 w-full h-full grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700" 
+                        style={{ border: 0 }} 
+                        loading="lazy" 
+                        referrerPolicy="no-referrer-when-downgrade" 
+                        title="Titanium City Center Map"
+                      />
+                  </div>
+
                   <div className="card-soft p-8">
-                      <h3 className="text-xl font-medium mb-4">Global Headquarters</h3>
+                      <h3 className="text-xl font-medium mb-4">Corporate Offices</h3>
                       <div className="space-y-4 text-sm text-muted-foreground">
                           <p>
                               <strong className="text-foreground block mb-1">Address:</strong>
-                              101 Energy Way, Suite 400<br/>
-                              Innovation District<br/>
-                              San Francisco, CA 94105
+                              EnerSpace Technology LLP<br/>
+                              H 308 Titanium City Center<br/>
+                              100 ft Road, Prahlad Nagar,<br/>
+                              Satellite, Ahmedabad 380015
                           </p>
                           <hr className="border-border/50" />
                           <p>
                               <strong className="text-foreground block mb-1">Email & Phone:</strong>
-                              contact@powertwinx.com<br/>
-                              +1 (800) 555-TWIN
+                              info@powertwinx.com<br/>
+                              +91 8238972042
                           </p>
                           <hr className="border-border/50" />
                           <p>
                               <strong className="text-foreground block mb-1">Business Hours:</strong>
                               Monday - Friday<br/>
-                              9:00 AM - 6:00 PM (PST)
+                              9:00 AM - 6:00 PM (IST)
                           </p>
                       </div>
-                  </div>
-
-                  {/* Stylized Google Map Placeholder */}
-                  <div className="relative w-full aspect-square rounded-2xl border border-border/50 bg-surface overflow-hidden group cursor-pointer shadow-[0_0_20px_rgba(205,255,100,0.02)] flex items-center justify-center">
-                       {/* Map Grid Pattern */}
-                       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik0wIDM5LjVoNDBWNDBoLTQweiBNMzkuNSAwSDQwdjQwSDM5LjV6IiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIi8+PC9zdmc+')] opacity-50" />
-                       
-                       {/* Ping */}
-                       <div className="relative z-10 w-4 h-4 rounded-full bg-volt">
-                           <div className="absolute inset-0 rounded-full bg-volt animate-ping opacity-75" />
-                       </div>
-                       
-                       <div className="absolute bottom-4 right-4 bg-background/80 backdrop-blur-sm border border-border px-3 py-1.5 rounded-lg text-xs font-medium text-foreground">
-                           View on Map
-                       </div>
                   </div>
               </div>
 
