@@ -8,7 +8,6 @@ export function Header() {
         <Link to="/" className="transition-colors hover:text-white [&.active]:text-white">Home</Link>
         <Link to="/about" className="transition-colors hover:text-white [&.active]:text-white">About Us</Link>
         <Link to="/case-studies" className="transition-colors hover:text-white [&.active]:text-white">Case Studies</Link>
-        <Link to="/demo" className="transition-colors hover:text-white [&.active]:text-white">Demo</Link>
         <Link to="/contact" className="transition-colors hover:text-white [&.active]:text-white">Contact</Link>
       </nav>
       <div className="flex items-center gap-3">
