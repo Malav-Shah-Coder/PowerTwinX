@@ -82,16 +82,15 @@ export function AboutPage() {
       </Section>
 
       {/* Leadership Team */}
-      <Section className="mb-20 md:mb-32">
+      <Section className="mb-12 md:mb-20">
         <div className="reveal mb-12">
             <Eyebrow>Leadership</Eyebrow>
-            <h2 className="mt-5 text-4xl">Meet the Experts</h2>
+            <h2 className="mt-5 text-4xl">Guiding Our Vision</h2>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
             {[ 
                 {name: "Er Dr Niraj Shah", role: "Director of PowerTwinX", image: "/Niraj-Shah.png"},
-                {name: "Sudip Metha", role: "Director of PowerTwinX", image: "/Sudip-Mehta.png"},
-                {name: "Dhruvi Pendor", role: "Director of PowerTwinX", image: "/Dhruvi-Pendor.jpg"}
+                {name: "Sudip Metha", role: "Director of PowerTwinX", image: "/Sudip-Mehta.png"}
             ].map((member, i) => (
                 <div key={i} className="reveal group relative overflow-hidden rounded-2xl border border-border bg-surface p-1">
                     <div className="aspect-[3/4] bg-muted/30 rounded-xl overflow-hidden relative transition-transform duration-700 group-hover:scale-[1.03]">
@@ -101,6 +100,31 @@ export function AboutPage() {
                     <div className="absolute bottom-6 left-6 right-6 z-20">
                         <h3 className="text-xl font-medium text-white drop-shadow-md">{member.name}</h3>
                         <p className="text-sm text-volt mt-1 font-medium tracking-wide">{member.role}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+      </Section>
+
+      {/* Engineering / Development Team */}
+      <Section className="mb-20 md:mb-32">
+        <div className="reveal mb-12">
+            <Eyebrow>Our Team</Eyebrow>
+            <h2 className="mt-5 text-4xl">The Innovators Behind the Platform</h2>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+            {[ 
+                {name: "Malav Shah", image: "/Malav-Shah.png"},
+                {name: "Rakhshit Kothari", image: "/Rakhshit-Kothari.png"},
+                {name: "Deep Prajapati", image: "/Deep-Prajapati.png"}
+            ].map((member, i) => (
+                <div key={i} className="reveal group relative overflow-hidden rounded-2xl border border-border bg-surface p-1">
+                    <div className="w-full aspect-square bg-muted/30 rounded-xl overflow-hidden relative transition-transform duration-700 group-hover:scale-[1.03]">
+                         <img src={member.image} alt={member.name} className="absolute inset-0 w-full h-full object-cover object-top" />
+                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 z-10" />
+                    </div>
+                    <div className="absolute bottom-6 left-6 right-6 z-20">
+                        <h3 className="text-xl font-medium text-white drop-shadow-md">{member.name}</h3>
                     </div>
                 </div>
             ))}

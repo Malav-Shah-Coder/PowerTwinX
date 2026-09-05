@@ -163,7 +163,7 @@ function Slideshow() {
     "/slide-3.png",
     "/slide-4.png",
     "/slide-5.png",
-    "/slide-5.png",
+    "/slide-6.png",
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -175,25 +175,37 @@ function Slideshow() {
   }, []);
 
   return (
-    <div className="card-soft relative aspect-video w-full flex items-center justify-center overflow-hidden border-border bg-black/90">
-      {images.map((src, index) => (
-        <img
-          key={src}
-          src={src}
-          alt={`Slide ${index + 1}`}
-          className={cn(
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-1000",
-            index === currentIndex ? "opacity-100" : "opacity-0"
-          )}
-        />
-      ))}
-      <div className="" />
-      {/* <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" /> */}
-      {/* <div className="absolute bottom-6 left-0 right-0 z-10 text-center">
-         <div className="font-display text-2xl tracking-wider text-white drop-shadow-md">
-             DIGITALLY CONNECTED
-         </div>
-      </div> */}
+    <div className="w-full flex flex-col gap-6 items-center mt-6 md:mt-0">
+      <div className="card-soft relative aspect-video w-full flex items-center justify-center overflow-hidden border-border bg-black/90 rounded-2xl group">
+        {images.map((src, index) => (
+          <img
+            key={index}
+            src={src}
+            alt={`Slide ${index + 1}`}
+            className={cn(
+              "absolute inset-0 w-full h-full object-cover transition-opacity duration-1000",
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            )}
+          />
+        ))}
+      </div>
+      
+      {/* Dots Indicator Under Image */}
+      <div className="flex justify-center gap-4">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={cn(
+              "h-2.5 w-2.5 rounded-full transition-all duration-300 ease-in-out shadow-sm",
+              index === currentIndex 
+                ? "bg-volt scale-150 -translate-y-1" 
+                : "bg-yellow-200/50 hover:bg-yellow-200/90 hover:scale-125 hover:-translate-y-0.5"
+            )}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
