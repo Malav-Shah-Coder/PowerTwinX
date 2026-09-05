@@ -24,10 +24,10 @@ export const Route = createFileRoute("/")({
 });
 
 const stats = [
-  { k: "1.2M", l: "Sensor points streamed per minute" },
-  { k: "99.98%", l: "Simulation-to-field accuracy" },
-  { k: "<40ms", l: "Twin state refresh latency" },
-  { k: "18%", l: "Average loss reduction" },
+  { k: "24×7", l: "digital visibility" },
+  { k: "100%", l: "digitally identified assets" },
+  { k: "75%+", l: "faster action on customer side" },
+  { k: "75%+", l: "Manual or Unwanted loss cover Minimum" },
 ];
 
 const faqs = [
@@ -59,7 +59,7 @@ function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("relative z-10 mx-auto w-full max-w-6xl px-6 py-28 md:py-40", className)}>
+    <section id={id} className={cn("relative z-10 mx-auto w-full max-w-[80rem] w-[min(94%,80rem)] py-28 md:py-40", className)}>
       {children}
     </section>
   );
@@ -141,9 +141,9 @@ function AnimatedLines() {
 
 function PlatformCard({ num, title, highlight, desc, icon: Icon }: { num: string, title: string, highlight: string, desc: string, icon: any }) {
   return (
-    <div className="card-soft reveal group flex items-center gap-4 p-5 hover:border-volt/30 transition-all bg-black/90 backdrop-blur-md relative z-10 w-full sm:w-[300px]">
-      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-background border border-border shadow-sm group-hover:border-volt/50 transition-colors duration-500">
-        <Icon className="h-6 w-6 text-foreground group-hover:text-volt transition-colors" />
+    <div className="card-soft reveal group flex flex-col md:flex-row items-start md:items-center gap-4 p-5 md:p-6 hover:border-volt/30 transition-all bg-black/90 backdrop-blur-md relative z-10 w-full sm:w-[320px]">
+      <div className="flex h-12 w-12 md:h-14 md:w-14 shrink-0 items-center justify-center rounded-full bg-background border border-border shadow-sm group-hover:border-volt/50 transition-colors duration-500">
+        <Icon className="h-5 w-5 md:h-6 md:w-6 text-foreground group-hover:text-volt transition-colors" />
       </div>
       <div>
         {/* <div className="text-xs font-semibold tracking-wider text-white">{num}</div> */}
@@ -158,11 +158,12 @@ function PlatformCard({ num, title, highlight, desc, icon: Icon }: { num: string
 
 function Slideshow() {
   const images = [
-    "/slide-1.png",
-    "/slide-2.png",
+    "/slide-1.jpeg",
+    "/slide-2.jpeg",
     "/slide-3.png",
-    "/slide-4.jpeg",
-    "/slide-5.jpeg",
+    "/slide-4.png",
+    "/slide-5.png",
+    "/slide-5.png",
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 

@@ -45,15 +45,21 @@ export function AboutPage() {
       <div className="absolute top-0 left-0 w-full h-[50vh] bg-gradient-to-b from-volt/5 to-transparent pointer-events-none" />
 
       {/* Hero / Company Overview */}
-      <Section className="mt-32">
+      <Section className="mt-16">
         <div className="reveal max-w-3xl">
           <Eyebrow>About Us</Eyebrow>
-          <h1 className="mt-6 text-5xl md:text-7xl font-light">
-            Engineering the <span className="text-gradient-volt font-medium">Future</span> of Grid Intelligence
+          <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-light">
+            Making the Energy Journey <br className="hidden md:block" />
+            <span className="text-gradient-volt font-medium">Visible, Intelligent</span> & Better.
           </h1>
-          <p className="mt-6 text-xl text-muted-foreground leading-relaxed">
-            PowerTwinX was founded with a singular purpose: to bring unparalleled clarity and control to the world's most complex electrical networks. We are a team of power systems engineers, data scientists, and UI/UX obsessives building the ultimate digital twin platform.
-          </p>
+          <div className="mt-6 space-y-4">
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              PowerTwinX was built to bring greater clarity to the way energy moves, performs, and is used. We combine digital twin technology with energy intelligence to create a connected digital view of the energy journey — from generation and transmission to delivery and consumption.
+            </p>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Our focus is simple: help energy systems become easier to understand, analyse, optimise, and improve.
+            </p>
+          </div>
         </div>
       </Section>
 
