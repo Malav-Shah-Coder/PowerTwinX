@@ -59,7 +59,7 @@ function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("relative z-10 mx-auto w-full max-w-[80rem] w-[min(94%,80rem)] py-28 md:py-40", className)}>
+    <section id={id} className={cn("relative z-10 mx-auto w-[min(92%,80rem)] px-6 md:px-12 py-20 md:py-32", className)}>
       {children}
     </section>
   );
@@ -256,7 +256,7 @@ function Index() {
                 Discover PowerTwinX
               </a>
               <a
-                href="/demo"
+                href="/request-demo"
                 className="rounded-full border border-border bg-surface px-7 py-3 text-sm font-medium transition-colors hover:bg-muted"
               >
                 Platform Demo
@@ -467,7 +467,7 @@ function Index() {
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-4">
               <a
-                href="/demo"
+                href="/request-demo"
                 className="rounded-full bg-primary px-8 py-4 px-10 text-sm font-medium text-primary-foreground hover:scale-105 transition-transform"
               >
                 Book a Consultation

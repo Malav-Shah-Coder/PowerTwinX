@@ -17,7 +17,7 @@ export function Header() {
         <Link to="/case-studies" className="transition-colors hover:text-white [&.active]:text-white">Case Studies</Link>
         <Link to="/contact" className="transition-colors hover:text-white [&.active]:text-white">Contact</Link>
         <Link
-          to="/demo"
+          to="/request-demo"
           className="ml-4 rounded-full bg-white px-5 py-2 text-xs font-medium text-black shadow-[var(--shadow-soft)] hover:-translate-y-0.5 transition-transform hover:bg-gray-100"
         >
           Request Demo
@@ -40,7 +40,7 @@ export function Header() {
             <div className="pt-4 border-t border-white/10">
               <Link
                 onClick={() => setMenuOpen(false)}
-                to="/demo"
+                to="/request-demo"
                 className="w-full inline-block text-center rounded-full bg-white px-5 py-3 text-sm font-medium text-black"
               >
                 Request Demo

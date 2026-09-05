@@ -17,6 +17,7 @@ import { Route as DemoRouteImport } from './routes/demo'
 import { Route as MainRouteImport } from './routes/main'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as RequestDemoRouteImport } from './routes/request-demo'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as TermsRouteImport } from './routes/terms'
 
@@ -60,6 +61,11 @@ const ProjectsRoute = ProjectsRouteImport.update({
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RequestDemoRoute = RequestDemoRouteImport.update({
+  id: '/request-demo',
+  path: '/request-demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResourcesRoute = ResourcesRouteImport.update({
   id: '/resources',
   path: '/resources',
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/main': typeof MainRoute
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
+  '/request-demo': typeof RequestDemoRoute
   '/resources': typeof ResourcesRoute
   '/terms': typeof TermsRoute
 }
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/main': typeof MainRoute
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
+  '/request-demo': typeof RequestDemoRoute
   '/resources': typeof ResourcesRoute
   '/terms': typeof TermsRoute
 }
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/main': typeof MainRoute
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
+  '/request-demo': typeof RequestDemoRoute
   '/resources': typeof ResourcesRoute
   '/terms': typeof TermsRoute
 }
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/main'
     | '/privacy'
     | '/projects'
+    | '/request-demo'
     | '/resources'
     | '/terms'
   fileRoutesByTo: FileRoutesByTo
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/main'
     | '/privacy'
     | '/projects'
+    | '/request-demo'
     | '/resources'
     | '/terms'
   id:
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/main'
     | '/privacy'
     | '/projects'
+    | '/request-demo'
     | '/resources'
     | '/terms'
   fileRoutesById: FileRoutesById
@@ -156,6 +168,7 @@ export interface RootRouteChildren {
   MainRoute: typeof MainRoute
   PrivacyRoute: typeof PrivacyRoute
   ProjectsRoute: typeof ProjectsRoute
+  RequestDemoRoute: typeof RequestDemoRoute
   ResourcesRoute: typeof ResourcesRoute
   TermsRoute: typeof TermsRoute
 }
@@ -218,6 +231,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/request-demo': {
+      id: '/request-demo'
+      path: '/request-demo'
+      fullPath: '/request-demo'
+      preLoaderRoute: typeof RequestDemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resources': {
       id: '/resources'
       path: '/resources'
@@ -244,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   MainRoute: MainRoute,
   PrivacyRoute: PrivacyRoute,
   ProjectsRoute: ProjectsRoute,
+  RequestDemoRoute: RequestDemoRoute,
   ResourcesRoute: ResourcesRoute,
   TermsRoute: TermsRoute,
 }

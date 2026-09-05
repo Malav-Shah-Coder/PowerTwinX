@@ -5,6 +5,7 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { useLenis, useReveals } from "@/hooks/useScrollSetup";
 import { useState } from "react";
 import { createServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -46,7 +47,7 @@ const sendContactEmail = createServerFn({ method: "POST" })
 
 function Section({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <section className={`relative z-10 mx-auto w-full max-w-6xl px-6 py-20 md:py-32 ${className}`}>
+    <section className={`relative z-10 mx-auto w-[min(92%,80rem)] px-6 md:px-12 py-20 md:py-32 ${className}`}>
       {children}
     </section>
   );
@@ -72,17 +73,25 @@ export function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.org || !formData.message) {
+      toast.error("Please fully fill out all the fields before submitting.");
+      return;
+    }
+    
     setStatus("loading");
     try {
       const res = await sendContactEmail({ data: formData });
       if (res.success) {
         setStatus("success");
+        toast.success("Your message has been successfully sent! We will reach out shortly.");
         setFormData({ firstName: "", lastName: "", email: "", org: "", type: "Request a Demo / Book Consultation", message: "" });
       } else {
         setStatus("error");
+        toast.error("There was a problem sending your message. Please try again.");
       }
     } catch {
       setStatus("error");
+      toast.error("There was an unexpected error. Please email us directly.");
     }
   };
 
@@ -115,20 +124,20 @@ export function ContactPage() {
                       <div className="grid grid-cols-2 gap-6">
                           <div className="space-y-2">
                               <label className="text-sm font-medium text-foreground">First Name</label>
-                              <input required value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} type="text" className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors" placeholder="John" />
+                              <input value={formData.firstName} onChange={e => setFormData({...formData, firstName: e.target.value})} type="text" className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors" placeholder="John" />
                           </div>
                           <div className="space-y-2">
                               <label className="text-sm font-medium text-foreground">Last Name</label>
-                              <input required value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} type="text" className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors" placeholder="Doe" />
+                              <input value={formData.lastName} onChange={e => setFormData({...formData, lastName: e.target.value})} type="text" className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors" placeholder="Doe" />
                           </div>
                       </div>
                       <div className="space-y-2">
                           <label className="text-sm font-medium text-foreground">Work Email</label>
-                          <input required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} type="email" className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors" placeholder="john@utility.com" />
+                          <input value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} type="email" className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors" placeholder="john@utility.com" />
                       </div>
                       <div className="space-y-2">
                           <label className="text-sm font-medium text-foreground">Organization / Utility Name</label>
-                          <input required value={formData.org} onChange={e => setFormData({...formData, org: e.target.value})} type="text" className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors" placeholder="National Grid" />
+                          <input value={formData.org} onChange={e => setFormData({...formData, org: e.target.value})} type="text" className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors" placeholder="National Grid" />
                       </div>
                       <div className="space-y-2">
                           <label className="text-sm font-medium text-foreground">Inquiry Type</label>
@@ -141,12 +150,11 @@ export function ContactPage() {
                       </div>
                       <div className="space-y-2">
                           <label className="text-sm font-medium text-foreground">Message</label>
-                          <textarea required value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} rows={4} className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors resize-none" placeholder="How can we help you?"></textarea>
+                          <textarea value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} rows={4} className="w-full bg-surface/50 border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-volt/50 transition-colors resize-none" placeholder="How can we help you?"></textarea>
                       </div>
                       <button disabled={status === "loading"} className="rounded-full bg-primary px-8 py-3 w-full sm:w-auto text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50">
                           {status === "loading" ? "Sending..." : status === "success" ? "Message Sent!" : "Submit Request"}
                       </button>
-                      {status === "error" && <p className="text-red-500 text-sm mt-2">There was an error sending your message. Please try again.</p>}
                   </form>
               </div>
 
@@ -178,7 +186,7 @@ export function ContactPage() {
                           <p>
                               <strong className="text-foreground block mb-1">Email & Phone:</strong>
                               info@powertwinx.com<br/>
-                              +91 8238972042
+                              +91 82389 72042
                           </p>
                           <hr className="border-border/50" />
                           <p>
