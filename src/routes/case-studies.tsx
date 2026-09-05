@@ -117,9 +117,9 @@ export function CaseStudiesPage() {
           <div className="grid gap-12">
               {caseStudiesList.map((study, i) => (
                   <div key={i} className="reveal card-soft border border-border/50 p-8 md:p-12 overflow-hidden relative group">
-                      <div className="absolute top-0 right-0 p-8 text-6xl font-display text-muted-foreground/10 group-hover:text-volt/10 transition-colors pointer-events-none">
+                      {/* <div className="absolute top-0 right-0 p-8 text-6xl font-display text-muted-foreground/10 group-hover:text-volt/10 transition-colors pointer-events-none">
                           0{i + 1}
-                      </div>
+                      </div> */}
                       
                       <div className="flex flex-col md:flex-row gap-10 relative z-10">
                           <div className="md:w-1/3">
