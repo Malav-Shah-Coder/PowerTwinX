@@ -121,7 +121,7 @@ export function AboutPage() {
                 <div key={i} className="reveal group relative overflow-hidden rounded-2xl border border-border bg-surface p-1">
                     <div className="w-full aspect-square bg-muted/30 rounded-xl overflow-hidden relative transition-transform duration-700 group-hover:scale-[1.03]">
                          <img src={member.image} alt={member.name} className="absolute inset-0 w-full h-full object-cover object-top" />
-                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 z-10" />
+                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-100 z-10" />
                     </div>
                     <div className="absolute bottom-6 left-6 right-6 z-20">
                         <h3 className="text-xl font-medium text-white drop-shadow-md">{member.name}</h3>
