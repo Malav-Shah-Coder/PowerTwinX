@@ -36,17 +36,46 @@ const caseStudiesList = [
         title: "National Grid Optimization",
         industry: "Transmission",
         challenge: "High technical losses and unpredictable congestion during peak renewable generation.",
-        solution: "Deployed PowerTwinX for live flow simulation and dynamic rerouting.",
-        implementation: "3 weeks for total mapping & SCADA integration.",
-        results: ["15% reduction in technical loss", "Zero curtailment incidents", "$2M saved annually"]
+        solution: "Deployed PowerTwinX for live power-flow simulation, congestion analysis, and dynamic rerouting.",
+        implementation: "Digital mapping with SCADA and operational-data integration.",
+        results: ["15% potential reduction in technical losses*", "Zero avoidable curtailment events*", "$2M potential annual savings*"],
+        footnote: "*Illustrative PowerTwinX deployment targets — replace with validated customer results when available."
     },
     {
-        title: "Metro City Distribution",
+        title: "Smarter Feeder Management",
         industry: "Distribution",
-        challenge: "Frequent unpredicted transformer failures causing massive urban blackouts.",
-        solution: "Implemented predictive thermal modeling and anomaly detection via PowerTwinX.",
-        implementation: "2 weeks for asset ingestion and live sync.",
-        results: ["99.8% predictive accuracy", "40% faster response time", "Zero blind spots"]
+        challenge: "Limited visibility across distribution feeders caused voltage instability, inefficient asset utilisation, and delayed identification of network losses.",
+        solution: "PowerTwinX created a live digital representation of the distribution network to analyse power flows, identify anomalies, and optimise feeder operations.",
+        implementation: "Integrated GIS, smart-meter, SCADA, and feeder data into the PowerTwinX digital twin.",
+        results: ["20% faster identification of network anomalies*", "10% improvement in asset utilisation*", "25% reduction in avoidable field interventions*"],
+        footnote: "*Illustrative PowerTwinX targets.\n\nThis one is particularly well-grounded in real-world digital-twin applications. An IEA-supported Indian distribution-grid project used smart meters and sensors across 23 feeders and digital-twin models to analyse losses, load profiles, and voltage quality. It reported improved asset utilisation, more accurate energy measurement, and better visibility."
+    },
+    {
+        title: "Renewable Generation Optimization",
+        industry: "Renewable Energy",
+        challenge: "Variable solar and wind generation creates unpredictable power flows, increasing the risk of curtailment and making grid balancing more difficult.",
+        solution: "PowerTwinX simulates renewable-generation scenarios, forecasts system behaviour, and identifies optimal operating strategies before changes are implemented.",
+        implementation: "Connected generation data, weather inputs, network conditions, and operational models within the PowerTwinX environment.",
+        results: ["12% potential increase in renewable utilisation*", "30% faster scenario analysis*", "18% potential reduction in curtailment*"],
+        footnote: "*Illustrative PowerTwinX targets.\n\nThere is strong research support for this type of application: a UK smart-energy-network digital-twin demonstrator estimated that voltage-control strategies could reduce solar curtailment by 56% for an exemplar day."
+    },
+    {
+        title: "Predictive Asset Management",
+        industry: "Asset Intelligence",
+        challenge: "Reactive maintenance can result in unexpected failures, costly downtime, and unnecessary field inspections.",
+        solution: "PowerTwinX creates a digital representation of critical assets and continuously analyses operational behaviour to identify deviations and potential failure conditions.",
+        implementation: "Combined asset data, sensor information, historical performance, and predictive models within the digital twin.",
+        results: ["30% potential reduction in unplanned downtime*", "20% potential reduction in maintenance costs*", "40% faster fault identification*"],
+        footnote: "*Illustrative PowerTwinX targets.\n\nThis direction is also supported by current digital-twin research, which identifies predictive maintenance, fault detection, scenario simulation, and operational optimisation as major power-system applications."
+    },
+    {
+        title: "Intelligent Energy Optimization",
+        industry: "Energy Consumption",
+        challenge: "Large energy consumers often lack a unified view of where, when, and why energy is being consumed, making optimisation reactive rather than continuous.",
+        solution: "PowerTwinX builds a digital view of energy consumption across connected systems, identifying inefficient patterns and opportunities for intelligent load optimisation.",
+        implementation: "Connected real-time consumption data, equipment behaviour, operational schedules, and optimisation models.",
+        results: ["15% potential reduction in energy consumption*", "20% improvement in peak-load management*", "10% potential reduction in energy costs*"],
+        footnote: "*Illustrative PowerTwinX targets."
     }
 ];
 
@@ -74,14 +103,16 @@ export function CaseStudiesPage() {
       </Section>
 
       <Section className="pt-0">
-          {/* Filters Simulator */}
-          <div className="reveal flex gap-3 mb-10 overflow-x-auto pb-4">
-              {['All', 'Transmission', 'Distribution', 'Renewables'].map((f, i) => (
-                  <button key={i} className={`px-5 py-2 rounded-full border text-sm font-medium transition-colors ${i === 0 ? 'bg-primary text-primary-foreground border-primary' : 'bg-surface border-border hover:bg-muted'}`}>
+          {/* Filters Simulator - Temporarily Hidden */}
+          {false && (
+          <div className="reveal flex gap-3 mb-10 overflow-x-auto pb-4 custom-scrollbar">
+              {['All', 'Transmission', 'Distribution', 'Renewable Energy', 'Asset Intelligence', 'Energy Consumption'].map((f, i) => (
+                  <button key={i} className={`px-5 py-2 rounded-full border text-sm font-medium transition-colors whitespace-nowrap ${i === 0 ? 'bg-primary text-primary-foreground border-primary' : 'bg-surface border-border hover:bg-muted'}`}>
                       {f}
                   </button>
               ))}
           </div>
+          )}
 
           <div className="grid gap-12">
               {caseStudiesList.map((study, i) => (
@@ -109,21 +140,27 @@ export function CaseStudiesPage() {
                                   </div>
                               </div>
                           </div>
-                          
-                          <div className="md:w-2/3 bg-muted/20 rounded-2xl p-8 border border-border/40">
-                              <h3 className="text-lg font-medium mb-6">Key Results & KPIs</h3>
-                              <div className="grid sm:grid-cols-3 gap-6">
-                                  {study.results.map((res, idx) => {
-                                      const highlight = res.split(' ')[0];
-                                      const rest = res.substring(highlight.length + 1);
-                                      return (
-                                        <div key={idx} className="flex flex-col">
-                                            <span className="text-4xl font-display text-volt mb-2">{highlight}</span>
-                                            <span className="text-sm text-muted-foreground">{rest}</span>
-                                        </div>
-                                      );
-                                  })}
+                          <div className="md:w-2/3 bg-muted/20 rounded-2xl p-8 border border-border/40 flex flex-col justify-between">
+                              <div>
+                                  <h3 className="text-lg font-medium mb-6">Key Results & KPIs</h3>
+                                  <div className="grid sm:grid-cols-3 gap-6">
+                                      {study.results.map((res, idx) => {
+                                          const highlight = res.split(' ')[0];
+                                          const rest = res.substring(highlight.length + 1);
+                                          return (
+                                            <div key={idx} className="flex flex-col">
+                                                <span className="text-4xl font-display text-volt mb-2">{highlight}</span>
+                                                <span className="text-sm text-muted-foreground">{rest}</span>
+                                            </div>
+                                          );
+                                      })}
+                                  </div>
                               </div>
+                              {study.footnote && (
+                                  <div className="mt-8 pt-6 border-t border-border/50">
+                                      <p className="text-xs text-muted-foreground/60 whitespace-pre-wrap leading-relaxed">{study.footnote}</p>
+                                  </div>
+                              )}
                           </div>
                       </div>
                   </div>
